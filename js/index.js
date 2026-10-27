@@ -1,26 +1,36 @@
 const postales = [
-    { url: "img/img1.jpeg", alt: "Montañas bajo la Vía Láctea" },
-    { url: "img/img2.jpeg", alt: "Lago rodeado de bosque" },
-    { url: "img/img4.jpeg", alt: "Glaciar al atardecer" }
+    { url: "img/imagenes-carrousel/img1.jpeg", alt: "Bosque con rio y montañas" },
+    { url: "img/imagenes-carrousel/img2.jpeg", alt: "Rio rodeado de bosque" },
+    { url: "img/imagenes-carrousel/img4.jpeg", alt: "Montaña y bosque bajo la vía lactea" }
 ];
 
-const track = document.querySelector(".carrousel-track");
-const btnPrev = document.querySelector(".carrusel-btn.prev");
-const btnNext = document.querySelector(".carrusel-btn.next");
+const imagen = document.getElementById("imagen-carrousel")
+const btnPrev = document.querySelector(".carrousel-btn.prev");
+const btnNext = document.querySelector(".carrousel-btn.next");
 
 let index = 0;
 
-postales.forEach(({ url, alt }) => {
-    const img = document.createElement("img");
-    img.src = url;
-    img.alt = alt;
-    track.appendChild(img);
-});
-
-function mostrar(i) {
-    index = (i + postales.length) % postales.length;
-    track.style.transform = `translateX(-${index * 100}%)`;
+function mostrar() {
+    imagen.src = postales[index].url
+    imagen.alt = postales[index].alt
 }
 
-btnPrev.addEventListener("click", () => mostrar(index - 1));
-btnNext.addEventListener("click", () => mostrar(index + 1));
+btnPrev.addEventListener("click", () => {
+    if (index === 0) {
+        index = postales.length -1;
+    } else {
+        index --;
+    }
+    mostrar();
+});
+
+btnNext.addEventListener("click", () => {
+    if (index === postales.length -1) {
+        index = 0;
+    } else {
+        index ++;
+    }
+    mostrar()
+});
+
+mostrar();
