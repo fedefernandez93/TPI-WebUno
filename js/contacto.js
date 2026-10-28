@@ -1,5 +1,35 @@
 const formulario = document.getElementById("formulario");
 
+function crearSpanError(input, idSpan){
+    const existeSpan = document.getElementById(idSpan);
+
+    // Si existe un span con ese id lo borra
+    if(existeSpan){
+        existeSpan.remove();
+    }
+
+    if(idSpan === "exitoMensaje"){
+        const span = document.createElement("span");
+        span.id = idSpan;
+        span.classList.add("exito");
+        input.after(span);
+    } else {
+        const span = document.createElement("span");
+        span.id = idSpan;
+        span.classList.add("error");
+        input.after(span);
+    }
+
+}
+
+function removerSpan(idSpan){
+    const existeSpan = document.getElementById(idSpan);
+
+    if(existeSpan){
+        existeSpan.remove();
+    }
+}
+
 formulario.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -9,16 +39,18 @@ formulario.addEventListener("submit", (e) => {
     const tel = document.getElementById("tel");
     const mensaje = document.getElementById("mensaje");
 
+    // Obtengo el li para poder ponerlo despues de ella
+    const btn = document.getElementById("liBtn");
+
+
     // Obtengo todos los span de error
     const spanNombre = document.getElementById("errorNombre");
     const spanTelefono = document.getElementById("errorTelefono");
     const spanMail = document.getElementById("errorMail");
     const spanMensaje = document.getElementById("errorMensaje");
 
-    // Obtengo el span de exito
-    const spanExito = document.getElementById("mensajeExito");
-
-    spanExito.innerHTML = "";
+    // Obtengo el span exito
+    
 
 // CHEQUEO NOMBRE COMPLETO
 
@@ -38,8 +70,17 @@ formulario.addEventListener("submit", (e) => {
             errorNombre += "* No se permiten caracteres especiales ni números <br>";
         }
     }
+    
+    if(errorNombre.length > 0){
+        crearSpanError(nombre,"errorNombre");
 
-    spanNombre.innerHTML = errorNombre;
+        const spanNombre = document.getElementById("errorNombre");
+        spanNombre.innerHTML = errorNombre;
+    } else {
+        if(errorNombre.length === 0){
+            removerSpan("errorNombre");
+        }
+    }
 // =====================================================
 
 // CHEQUEO NUMERO DE TELEFONO
@@ -53,7 +94,17 @@ formulario.addEventListener("submit", (e) => {
         }
     }
 
-    spanTelefono.innerHTML = errorTelefono;
+    if(errorTelefono.length > 0){
+        crearSpanError(tel,"errorTelefono");
+
+        const spanTelefono = document.getElementById("errorTelefono");
+        spanTelefono.innerHTML = errorTelefono;
+    } else {
+        if(errorTelefono.length === 0){
+            removerSpan("errorTelefono");
+        }
+    }
+    
 // =====================================================
 
 // CHEQUEO MAIL
@@ -64,11 +115,21 @@ formulario.addEventListener("submit", (e) => {
         errorMail += "* Este campo es obligatorio";
     } else {
         if(!check.test(mail.value)){
-            errorMail = "* Debe ingresar un mail válido";
+            errorMail += "* Debe ingresar un mail válido";
         }
     }
     
-    spanMail.innerHTML = errorMail;
+    
+    if(errorMail.length > 0){
+        crearSpanError(mail,"errorMail");
+
+        const spanMail = document.getElementById("errorMail");
+        spanMail.innerHTML = errorMail;
+    } else {
+        if(errorMail.length === 0){
+            removerSpan("errorMail");
+        }
+    }
 
 // =====================================================
 
@@ -85,7 +146,16 @@ formulario.addEventListener("submit", (e) => {
         }
     }
 
-    spanMensaje.innerHTML = errorMensaje;
+    if(errorMensaje.length > 0){
+        crearSpanError(mensaje,"errorMensaje");
+
+        const spanMensaje = document.getElementById("errorMensaje");
+        spanMensaje.innerHTML = errorMensaje;
+    } else {
+        if(errorMensaje.length === 0){
+            removerSpan("errorMensaje");
+        }
+    }
 
 // MENSAJE DE EXITO
     if (errorNombre.length == 0 && errorMail.length == 0 && errorTelefono.length == 0 && errorMensaje.length == 0){
@@ -93,6 +163,17 @@ formulario.addEventListener("submit", (e) => {
         // Reseteamos los campos porque fue exitoso
         formulario.reset()
 
-        spanExito.innerHTML = "Consulta enviada exitosamente!"
+        crearSpanError(btn,"exitoMensaje");
+
+        const spanExito = document.getElementById("exitoMensaje");
+
+        spanExito.textContent = "Consula enviada de manera exitosa!"; 
+    } else {
+        const spanExito = document.getElementById("exitoMensaje");
+
+        if(spanExito != null){
+            removerSpan("exitoMensaje");
+        }
     }
 })
+
