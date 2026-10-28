@@ -67,3 +67,15 @@
 .formulario button:hover {
     background: var(--color-dark-header);
 }
+
+.error {
+    color: red;
+    font-size: 13px;
+}
+
+.exito {
+    color: green;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+}
