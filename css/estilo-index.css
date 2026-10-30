@@ -101,11 +101,19 @@ main h2 {
     text-align: left;
     transition: transform var(--transition-fast), box-shadow var(--transition-fast);
     margin-bottom: 15px;
+    cursor: pointer;
 }
 
 .cards-preguntas:hover{
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
+}
+
+.respuesta {
+    color: var(--color-text-muted);
+    font-style: italic;
+    font-size: medium;
+    margin: 10px;
 }
 
 .hrstyle {
