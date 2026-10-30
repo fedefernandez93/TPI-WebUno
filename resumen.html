@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DestinoSur - Mi Viaje</title>
+    <link rel="stylesheet" href="css/estilo-general.css">
+    <link rel="stylesheet" href="css/estilo-resumen.css">
+</head>
+<body>
+
+    <header>
+        <nav class="nav-container">
+            <div class="logo">🏔️ DestinoSur <span>Patagonia</span></div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="servicios.html">Servicios</a></li>
+                <li><a href="resumen.html" class="active">Mi Viaje</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Simulador de Presupuesto</h1>
+            <p>Armá tu paquete personalizado eligiendo los servicios que mejor se adapten a tu experiencia patagónica.</p>
+        </section>
+
+        <section class="resumen-container">
+            <!-- Panel de Formulario / Opciones -->
+            <div class="panel-opciones">
+                <h2>1. Configurá tu Viaje</h2>
+                <form id="form-presupuesto">
+                    <div class="campo-grupo">
+                        <label for="alojamiento">Hospedaje:</label>
+                        <select id="alojamiento" name="alojamiento">
+                            <option value="0">Sin alojamiento seleccionado</option>
+                            <option value="85000">Hotel Alpenhaus & Spa ($85.000 / noche)</option>
+                            <option value="65000">Cabañas del Bosque Ñire ($65.000 / noche)</option>
+                            <option value="50000">Apart Hotel Cordillera Vista ($50.000 / noche)</option>
+                            <option value="35000">Refugio & Hostel Aventura ($35.000 / noche)</option>
+                        </select>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label for="dias">Cantidad de noches:</label>
+                        <input type="number" id="dias" name="dias" min="1" value="1">
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label for="personas">Pasajeros:</label>
+                        <input type="number" id="personas" name="personas" min="1" value="1">
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label>Excursiones adicionales:</label>
+                        <div class="checkbox-opcion">
+                            <input type="checkbox" id="exc1" value="25000">
+                            <label for="exc1">Trekking Cerro Campanario ($25.000 p/p)</label>
+                        </div>
+                        <div class="checkbox-opcion">
+                            <input type="checkbox" id="exc2" value="45000">
+                            <label for="exc2">Navegación Isla Victoria ($45.000 p/p)</label>
+                        </div>
+                        <div class="checkbox-opcion">
+                            <input type="checkbox" id="exc3" value="95000">
+                            <label for="exc3">Minitrekking Glaciar Perito Moreno ($95.000 p/p)</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Panel de Resultados -->
+            <div class="panel-resultado">
+                <h2>2. Desglose del Presupuesto</h2>
+                <div id="detalle-presupuesto" class="tarjeta-resumen">
+                    <p class="resumen-item"><span>Alojamiento:</span> <strong id="res-alojamiento">$0</strong></p>
+                    <p class="resumen-item"><span>Excursiones:</span> <strong id="res-excursiones">$0</strong></p>
+                    <p class="resumen-item"><span>Subtotal:</span> <strong id="res-subtotal">$0</strong></p>
+                    <hr>
+                    <p class="resumen-total"><span>Total estimado:</span> <strong id="res-total">$0</strong></p>
+                    <button type="button" class="btn-confirmar">Confirmar Reserva</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2026 DestinoSur Patagonia <span>|</span> Tel: +54 266 4123456 <span>|</span> Email: consultas@destinosur.com.ar</p>
+        </div>
+    </footer>
+
+    <script src="js/resumen.js"></script>
+</body>
+</html>
