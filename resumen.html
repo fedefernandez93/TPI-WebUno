@@ -24,22 +24,24 @@
     <main>
         <section class="hero">
             <h1>Simulador de Presupuesto</h1>
-            <p>Armá tu paquete personalizado eligiendo los servicios que mejor se adapten a tu experiencia patagónica.</p>
+            <p>Elegí un hospedaje para habilitar las excursiones de su zona y configurá tu vehículo de alquiler.</p>
         </section>
 
         <section class="resumen-container">
-            <!-- Panel de Formulario / Opciones -->
+            <!-- Panel de Opciones -->
             <div class="panel-opciones">
                 <h2>1. Configurá tu Viaje</h2>
                 <form id="form-presupuesto">
+                    
+                    <!-- Hospedaje -->
                     <div class="campo-grupo">
                         <label for="alojamiento">Hospedaje:</label>
                         <select id="alojamiento" name="alojamiento">
-                            <option value="0">Sin alojamiento seleccionado</option>
-                            <option value="85000">Hotel Alpenhaus & Spa ($85.000 / noche)</option>
-                            <option value="65000">Cabañas del Bosque Ñire ($65.000 / noche)</option>
-                            <option value="50000">Apart Hotel Cordillera Vista ($50.000 / noche)</option>
-                            <option value="35000">Refugio & Hostel Aventura ($35.000 / noche)</option>
+                            <option value="0" data-location="none">Seleccioná un hospedaje...</option>
+                            <option value="85000" data-location="bariloche">Hotel Alpenhaus & Spa - Bariloche ($85.000 / noche)</option>
+                            <option value="65000" data-location="san-martin">Cabañas del Bosque Ñire - San Martín ($65.000 / noche)</option>
+                            <option value="50000" data-location="ushuaia">Apart Hotel Cordillera Vista - Ushuaia ($50.000 / noche)</option>
+                            <option value="35000" data-location="el-chalten">Refugio & Hostel Aventura - El Chaltén ($35.000 / noche)</option>
                         </select>
                     </div>
 
@@ -53,30 +55,56 @@
                         <input type="number" id="personas" name="personas" min="1" value="1">
                     </div>
 
+                    <!-- Excursiones del catálogo estrictas -->
                     <div class="campo-grupo">
-                        <label>Excursiones adicionales:</label>
-                        <div class="checkbox-opcion">
-                            <input type="checkbox" id="exc1" value="25000">
-                            <label for="exc1">Trekking Cerro Campanario ($25.000 p/p)</label>
-                        </div>
-                        <div class="checkbox-opcion">
-                            <input type="checkbox" id="exc2" value="45000">
-                            <label for="exc2">Navegación Isla Victoria ($45.000 p/p)</label>
-                        </div>
-                        <div class="checkbox-opcion">
-                            <input type="checkbox" id="exc3" value="95000">
-                            <label for="exc3">Minitrekking Glaciar Perito Moreno ($95.000 p/p)</label>
+                        <label>Excursiones y Ocio:</label>
+                        <p id="aviso-zona" style="font-size: 0.85rem; color: var(--color-text-muted); font-style: italic;">Seleccioná un hospedaje para ver las actividades disponibles en la zona.</p>
+                        
+                        <div id="contenedor-actividades">
+                            <!-- Excursiones de Bariloche -->
+                            <div class="checkbox-opcion actividad-item" data-location="bariloche" style="display:none;">
+                                <input type="checkbox" id="exc-campanario" class="chk-actividad" value="25000">
+                                <label for="exc-campanario">Trekking Cerro Campanario ($25.000 p/p)</label>
+                            </div>
+                            <div class="checkbox-opcion actividad-item" data-location="bariloche" style="display:none;">
+                                <input type="checkbox" id="exc-isla" class="chk-actividad" value="45000">
+                                <label for="exc-isla">Navegación Isla Victoria & Arrayanes ($45.000 p/p)</label>
+                            </div>
+                            <div class="checkbox-opcion actividad-item" data-location="bariloche" style="display:none;">
+                                <input type="checkbox" id="exc-cerveza" class="chk-actividad" value="30000">
+                                <label for="exc-cerveza">Tour Gastronómico & Cervecerías ($30.000 p/p)</label>
+                            </div>
+
+                            <!-- Excursiones de El Chaltén (Minitrekking que figura en catálogo) -->
+                            <div class="checkbox-opcion actividad-item" data-location="el-chalten" style="display:none;">
+                                <input type="checkbox" id="exc-perito" class="chk-actividad" value="95000">
+                                <label for="exc-perito">Minitrekking Glaciar Perito Moreno ($95.000 p/p)</label>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Alquiler de Vehículo (Los 4 del catálogo) -->
+                    <div class="campo-grupo">
+                        <label for="vehiculo">Alquiler de Vehículo (Opcional):</label>
+                        <select id="vehiculo" name="vehiculo">
+                            <option value="0">Sin vehículo seleccionado</option>
+                            <option value="40000">Alquiler Fiat Cronos ($40.000 / día)</option>
+                            <option value="55000">Alquiler SUV Jeep Renegade ($55.000 / día)</option>
+                            <option value="75000">Alquiler Toyota Hilux 4x4 ($75.000 / día)</option>
+                            <option value="30000">Alquiler Moto Enduro 250cc ($30.000 / día)</option>
+                        </select>
+                    </div>
+
                 </form>
             </div>
 
-            <!-- Panel de Resultados -->
+            <!-- Panel de Desglose -->
             <div class="panel-resultado">
                 <h2>2. Desglose del Presupuesto</h2>
                 <div id="detalle-presupuesto" class="tarjeta-resumen">
                     <p class="resumen-item"><span>Alojamiento:</span> <strong id="res-alojamiento">$0</strong></p>
-                    <p class="resumen-item"><span>Excursiones:</span> <strong id="res-excursiones">$0</strong></p>
+                    <p class="resumen-item"><span>Excursiones / Ocio:</span> <strong id="res-excursiones">$0</strong></p>
+                    <p class="resumen-item"><span>Alquiler Vehículo:</span> <strong id="res-vehiculo">$0</strong></p>
                     <p class="resumen-item"><span>Subtotal:</span> <strong id="res-subtotal">$0</strong></p>
                     <hr>
                     <p class="resumen-total"><span>Total estimado:</span> <strong id="res-total">$0</strong></p>
