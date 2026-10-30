@@ -1,11 +1,7 @@
-<<<<<<< HEAD
-.formulario, .resumen-card {
-=======
 /* ==========================================
    ESTILOS: PÁGINA DE Contacto
    ========================================== */
-.formulario {
->>>>>>> 88d905a0ace8a075b8d9002545494786526980e3
+.formulario, .resumen-card {
     max-width: 600px;
     margin: 0 auto;
     background: #ffffff;
