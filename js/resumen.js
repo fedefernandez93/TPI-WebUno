@@ -96,11 +96,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (btnConfirmar) {
         btnConfirmar.addEventListener('click', () => {
+            const avisoExistente = document.getElementById('msg-reserva');
+            if (avisoExistente) avisoExistente.remove();
+
+            const msg = document.createElement('p');
+            msg.id = 'msg-reserva';
+            msg.style.marginTop = '0.8rem';
+            msg.style.fontSize = '0.9rem';
+            msg.style.fontWeight = '600';
+            msg.style.textAlign = 'center';
+
             if (parseFloat(selectAlojamiento.value) === 0) {
-                alert('Por favor, selecciona un hospedaje para continuar con tu cotización.');
+                // Error por DOM (sin alert)
+                msg.style.color = '#e74c3c';
+                msg.textContent = '⚠️ Por favor, seleccioná un hospedaje primero.';
             } else {
-                alert('¡Gracias por cotizar tu viaje con DestinoSur Patagonia!');
+                // Éxito por DOM (sin alert)
+                msg.style.color = '#27ae60';
+                msg.textContent = '¡Gracias por cotizar tu viaje con DestinoSur!';
+                btnConfirmar.disabled = true;
+                btnConfirmar.style.opacity = '0.7';
             }
+
+            btnConfirmar.after(msg);
         });
     }
 
