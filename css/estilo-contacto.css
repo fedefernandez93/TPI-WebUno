@@ -1,4 +1,4 @@
-.formulario {
+.formulario, .resumen-card {
     max-width: 600px;
     margin: 0 auto;
     background: #ffffff;
@@ -7,12 +7,16 @@
     box-shadow: var(--shadow-soft);
 }
 
+.resumen-card h2 {
+    margin-bottom: 20px;
+}
+
 .formulario ::placeholder {
     color: #7f8c8d;
     font-size: 15px;
 }
 
-.formulario ul {
+.formulario ul, .resumen-card ul {
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -51,7 +55,7 @@
     min-height: 120px;
 }
 
-.formulario button {
+.formulario button, .resumen-card button {
     width: 100%;
     margin: 0 auto;
     height: 40px;
@@ -64,7 +68,7 @@
     cursor: pointer;
 }
 
-.formulario button:hover {
+.formulario button:hover,.resumen-card button:hover {
     background: var(--color-dark-header);
 }
 
@@ -78,4 +82,21 @@
     font-size: 15px;
     font-weight: 700;
     text-align: center;
+}
+
+.lis {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.lis h4 {
+    color: var(--color-dark);
+    margin-right: 10px;
+}
+
+.lis p {
+    color: var(--color-text-muted);
+    font-size: 0.98rem;
+    line-height: 1.6;
 }
