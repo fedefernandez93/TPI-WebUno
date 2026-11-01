@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectAlojamiento = document.getElementById('alojamiento');
     const selectVehiculo = document.getElementById('vehiculo');
     const inputDias = document.getElementById('dias');
-    const inputPersonas = document.getElementById('personas');
+    const inputDiasVehiculo = document.getElementById('dias-vehiculo');
     const avisoZona = document.getElementById('aviso-zona');
     const itemsActividad = document.querySelectorAll('.actividad-item');
 
@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         itemsActividad.forEach(item => {
             const zonaItem = item.getAttribute('data-location');
             const chk = item.querySelector('input[type="checkbox"]');
+            const inputCant = item.querySelector('.input-cant-actividad');
 
             if (zonaSeleccionada !== 'none' && zonaItem === zonaSeleccionada) {
                 item.style.display = 'flex';
@@ -35,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 item.style.display = 'none';
                 if (chk) chk.checked = false; // Desmarca al cambiar de lugar
+                if (inputCant) inputCant.value = 1;
             }
         });
 
@@ -56,20 +58,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const precioNocheAlojamiento = parseFloat(selectAlojamiento.value) || 0;
         const precioVehiculoDia = parseFloat(selectVehiculo.value) || 0;
         const noches = parseInt(inputDias.value) || 1;
-        const pasajeros = parseInt(inputPersonas.value) || 1;
+        const diasVehiculo = parseInt(inputDiasVehiculo ? inputDiasVehiculo.value : 1) || 1;
 
         // Totales individuales
         const totalAlojamiento = precioNocheAlojamiento * noches;
-        const totalVehiculo = precioVehiculoDia * noches;
+        const totalVehiculo = precioVehiculoDia * diasVehiculo;
 
-        let costoActividadesPorPersona = 0;
+        let totalExcursiones = 0;
         itemsActividad.forEach(item => {
             const chk = item.querySelector('input[type="checkbox"]');
+            const inputCant = item.querySelector('.input-cant-actividad');
             if (item.style.display !== 'none' && chk && chk.checked) {
-                costoActividadesPorPersona += parseFloat(chk.value) || 0;
+                const precioUnitario = parseFloat(chk.value) || 0;
+                const personasActividad = inputCant ? (parseInt(inputCant.value) || 1) : 1;
+                totalExcursiones += precioUnitario * personasActividad;
             }
         });
-        const totalExcursiones = costoActividadesPorPersona * pasajeros;
 
         const totalFinal = totalAlojamiento + totalExcursiones + totalVehiculo;
 
@@ -85,12 +89,16 @@ document.addEventListener('DOMContentLoaded', () => {
     selectAlojamiento.addEventListener('change', actualizarFiltroZonas);
     selectVehiculo.addEventListener('change', calcularPresupuesto);
     inputDias.addEventListener('input', calcularPresupuesto);
-    inputPersonas.addEventListener('input', calcularPresupuesto);
+    if (inputDiasVehiculo) inputDiasVehiculo.addEventListener('input', calcularPresupuesto);
 
     itemsActividad.forEach(item => {
         const chk = item.querySelector('input[type="checkbox"]');
+        const inputCant = item.querySelector('.input-cant-actividad');
         if (chk) {
             chk.addEventListener('change', calcularPresupuesto);
+        }
+        if (inputCant) { 
+            inputCant.addEventListener('input', calcularPresupuesto);
         }
     });
 

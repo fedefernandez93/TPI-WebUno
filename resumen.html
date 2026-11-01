@@ -50,40 +50,63 @@
                         <input type="number" id="dias" name="dias" min="1" value="1">
                     </div>
 
-                    <div class="campo-grupo">
-                        <label for="personas">Pasajeros:</label>
-                        <input type="number" id="personas" name="personas" min="1" value="1">
-                    </div>
+                    
 
                     <!-- Excursiones del catálogo estrictas -->
                     <div class="campo-grupo">
-                        <label>Excursiones y Ocio:</label>
+                        <label>Excursiones y Ocio (Cobro por persona):</label>
                         <p id="aviso-zona" style="font-size: 0.85rem; color: var(--color-text-muted); font-style: italic;">Seleccioná un hospedaje para ver las actividades disponibles en la zona.</p>
                         
                         <div id="contenedor-actividades">
                             <!-- Excursiones de Bariloche -->
-                            <div class="checkbox-opcion actividad-item" data-location="bariloche" style="display:none;">
-                                <input type="checkbox" id="exc-campanario" class="chk-actividad" value="25000">
-                                <label for="exc-campanario">Trekking Cerro Campanario ($25.000 p/p)</label>
-                            </div>
-                            <div class="checkbox-opcion actividad-item" data-location="bariloche" style="display:none;">
-                                <input type="checkbox" id="exc-isla" class="chk-actividad" value="45000">
-                                <label for="exc-isla">Navegación Isla Victoria & Arrayanes ($45.000 p/p)</label>
-                            </div>
-                            <div class="checkbox-opcion actividad-item" data-location="bariloche" style="display:none;">
-                                <input type="checkbox" id="exc-cerveza" class="chk-actividad" value="30000">
-                                <label for="exc-cerveza">Tour Gastronómico & Cervecerías ($30.000 p/p)</label>
+                            <div class="checkbox-opcion actividad-item" data-location="bariloche" style="display:none; flex-direction: column; align-items: flex-start; gap: 0.3rem; margin-bottom: 0.8rem;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox" id="exc-campanario" class="chk-actividad" value="25000">
+                                    <label for="exc-campanario">Trekking Cerro Campanario ($25.000 p/p)</label>
+                                </div>
+                                <div style="margin-left: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                    <label for="cant-campanario" style="font-size: 0.85rem; font-weight: normal;">Personas:</label>
+                                    <input type="number" id="cant-campanario" class="input-cant-actividad" min="1" value="1" style="width: 60px; padding: 0.2rem; font-size: 0.85rem;">
+                                </div>
                             </div>
 
-                            <!-- Excursiones de El Chaltén (Minitrekking que figura en catálogo) -->
-                            <div class="checkbox-opcion actividad-item" data-location="el-chalten" style="display:none;">
-                                <input type="checkbox" id="exc-perito" class="chk-actividad" value="95000">
-                                <label for="exc-perito">Minitrekking Glaciar Perito Moreno ($95.000 p/p)</label>
+                            <div class="checkbox-opcion actividad-item" data-location="bariloche" style="display:none; flex-direction: column; align-items: flex-start; gap: 0.3rem; margin-bottom: 0.8rem;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox" id="exc-isla" class="chk-actividad" value="45000">
+                                    <label for="exc-isla">Navegación Isla Victoria & Arrayanes ($45.000 p/p)</label>
+                                </div>
+                                <div style="margin-left: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                    <label for="cant-isla" style="font-size: 0.85rem; font-weight: normal;">Personas:</label>
+                                    <input type="number" id="cant-isla" class="input-cant-actividad" min="1" value="1" style="width: 60px; padding: 0.2rem; font-size: 0.85rem;">
+                                </div>
+                            </div>
+
+                            <div class="checkbox-opcion actividad-item" data-location="bariloche" style="display:none; flex-direction: column; align-items: flex-start; gap: 0.3rem; margin-bottom: 0.8rem;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox" id="exc-cerveza" class="chk-actividad" value="30000">
+                                    <label for="exc-cerveza">Tour Gastronómico & Cervecerías ($30.000 p/p)</label>
+                                </div>
+                                <div style="margin-left: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                    <label for="cant-cerveza" style="font-size: 0.85rem; font-weight: normal;">Personas:</label>
+                                    <input type="number" id="cant-cerveza" class="input-cant-actividad" min="1" value="1" style="width: 60px; padding: 0.2rem; font-size: 0.85rem;">
+                                </div>
+                            </div>
+
+                            <!-- Excursión de El Chaltén -->
+                            <div class="checkbox-opcion actividad-item" data-location="el-chalten" style="display:none; flex-direction: column; align-items: flex-start; gap: 0.3rem; margin-bottom: 0.8rem;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox" id="exc-perito" class="chk-actividad" value="95000">
+                                    <label for="exc-perito">Minitrekking Glaciar Perito Moreno ($95.000 p/p)</label>
+                                </div>
+                                <div style="margin-left: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                    <label for="cant-perito" style="font-size: 0.85rem; font-weight: normal;">Personas:</label>
+                                    <input type="number" id="cant-perito" class="input-cant-actividad" min="1" value="1" style="width: 60px; padding: 0.2rem; font-size: 0.85rem;">
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Alquiler de Vehículo (Los 4 del catálogo) -->
+                    <!-- Alquiler de Vehículo -->
                     <div class="campo-grupo">
                         <label for="vehiculo">Alquiler de Vehículo (Opcional):</label>
                         <select id="vehiculo" name="vehiculo">
@@ -95,6 +118,10 @@
                         </select>
                     </div>
 
+                    <div class="campo-grupo">
+                        <label for="dias-vehiculo">Cantidad de días de alquiler de vehículo:</label>
+                        <input type="number" id="dias-vehiculo" name="dias_vehiculo" min="1" value="1">
+                    </div>
                 </form>
             </div>
 
